@@ -15,7 +15,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.14285, ran
 start = time.time()
 
 # Build the feedforward neural network
-mlp = MLPClassifier(hidden_layer_sizes=(100,), activation='relu', max_iter=100, alpha=1e-4, solver='sgd', verbose=10, tol=1e-4, random_state=1, learning_rate_init=0.1)
+mlp = MLPClassifier(hidden_layer_sizes=(500,500,500), activation='relu', max_iter=100, alpha=1e-4, solver='sgd', verbose=10, tol=1e-4, random_state=1, learning_rate_init=0.1)
 
 # Train the feedforward neural network
 mlp.fit(X_train, y_train)

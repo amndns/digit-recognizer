@@ -14,11 +14,10 @@ X, y = mnist.data / 255., mnist.target
 class_names = [0,1,2,3,4,5,6,7,8,9]
 
 # Split the data into a training set and a test set
-X_train, X_test = X[:60000], X[60000:]
-y_train, y_test = y[:60000], y[60000:]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.14285, random_state=42)
 
 # Run classifier, and run prediction
-mlp = MLPClassifier(hidden_layer_sizes=(100,), activation='logistic', max_iter=100, alpha=1e-4, solver='sgd', verbose=10, tol=1e-4, random_state=1, learning_rate_init=0.1)
+mlp = MLPClassifier(hidden_layer_sizes=(500,500,500), activation='relu', max_iter=100, alpha=1e-4, solver='sgd', verbose=10, tol=1e-4, random_state=1, learning_rate_init=0.1)
 
 y_pred = mlp.fit(X_train, y_train).predict(X_test)
 
