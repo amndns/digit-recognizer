@@ -1,6 +1,7 @@
 from sklearn.datasets import fetch_mldata
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import OneHotEncoder
 
 import time
 
@@ -10,12 +11,14 @@ print("Successfully fetched MNIST dataset")
 
 # Separate the dataset into training and testing
 X, y = mnist.data / 255., mnist.target
+enc = OneHotEncoder()
+y = enc.fit_transform(y.reshape(-1,1), y=None).toarray()
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.14285, random_state=42)
 
 start = time.time()
 
 # Build the feedforward neural network
-mlp = MLPClassifier(hidden_layer_sizes=(500,500,500), activation='relu', max_iter=100, alpha=1e-4, solver='sgd', verbose=10, tol=1e-4, random_state=1, learning_rate_init=0.1)
+mlp = MLPClassifier(hidden_layer_sizes=(600,500,500), activation='relu', max_iter=100, alpha=1e-4, solver='sgd', verbose=10, tol=1e-4, random_state=1, learning_rate_init=0.1)
 
 # Train the feedforward neural network
 mlp.fit(X_train, y_train)
